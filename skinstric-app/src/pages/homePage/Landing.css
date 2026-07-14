@@ -1,0 +1,19 @@
+.header{
+  height: 64px;
+  width: 100%;
+}
+
+.landing{
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__header{
+  font-size: 128px;
+  font-weight: 300;
+  line-height: 0.95;
+  text-align: center;
+
+}
