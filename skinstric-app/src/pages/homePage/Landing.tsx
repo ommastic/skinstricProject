@@ -2,18 +2,15 @@ import rectangle1 from '../../assets/Rectangle 2778.svg';
 import rectangle2 from '../../assets/Rectangle 2779.svg';
 import buttonIcon1 from '../../assets/button-icon-text-shrunk-left.svg';
 import buttonIcon2 from '../../assets/button-icon-text-shrunk-right.svg';
+import { useNavigate } from 'react-router-dom';
 import './Landing.css';
+import Header from '../../components/Header';
 
 export default function Landing() {
-
+  const navigate = useNavigate();
   return (
     <div className='landing'>
-      <header className='header-wrapper'>
-        <div className='header-left'>
-          <p>SKINsTRIC <span>[ INTRO ]</span></p>
-          <button className='header__right--button'>ENTER CODE</button>
-        </div>
-      </header>
+      <Header />
 
       <main className='main-wrapper'>
         <img className='rectangle rectangle--right' src={rectangle1} alt="" aria-hidden='true' />
@@ -24,21 +21,19 @@ export default function Landing() {
         </button>
 
         <h1 className="main__header">Sophisticated<br />skincare</h1>
-        <button className='landing__page--right'>
+        <button className='landing__page--right' onClick={() => navigate('/introduction')}>
           <img src={buttonIcon1} alt='Take Test' aria-hidden='true' />
         </button>
-      </main>
+   
 
-      <footer className='landing-footer'>
-        <p className='footer__description'>
+        <p className='landing__description'>
           SKINSTRIC DEVELOPED AN A.I THAT CREATES A
           <br />
           HIGHLY-PERSONALIZED ROUTINE TAILORED TO
           <br />
           WHAT YOUR SKIN NEEDS.
         </p>
-      </footer>
+      </main>
     </div>
-
   );
 }

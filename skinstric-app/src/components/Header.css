@@ -1,0 +1,44 @@
+.header-wrapper{
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.header-left{
+  height: 100%;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header__right--button{
+  color: white;
+  background-color: black;
+  border: none;
+  font-size: 10px;
+  padding: 8px 16px;
+  font-weight: 600;
+  height: 36px;
+  line-height: 16px;
+}
+
+.side-button__icon{
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+
+.header__logo{
+  text-decoration: none;
+}
+
+.header__logo:active{
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.text__intro{
+  margin-left: 12px;
+}

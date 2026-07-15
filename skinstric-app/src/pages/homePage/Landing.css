@@ -1,94 +1,86 @@
-.landing{
+.landing {
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.header-wrapper{
-  height: 64px;
-  flex-shrink: 0;
-}
-
-.header-left{
-  height: 100%;
-  padding: 0 16px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .main-wrapper {
   position: relative;
-  min-height: calc(100vh - 64px);
+  flex: 1;
+  min-height: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 0 5rem;
 }
 
-.rectangle{
+.rectangle {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 520px;
+  height: min(602px, 100%);
   width: auto;
   pointer-events: none;
 }
 
-.header__right--button{
-  color: white;
-  background-color: black;
-  border: none;
-  font-size: 10px;
-  padding: 8px 16px;
-  font-weight: 600;
-  height: 36px;
-  line-height: 16px;
-}
-
-.rectangle--left{
+.rectangle--left {
   left: 0;
 }
 
-.rectangle--right{
+.rectangle--right {
   right: 0;
 }
 
 .landing__page--left,
-.landing__page--right{
+.landing__page--right {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  gap: 16px;
   border: none;
   background: transparent;
   cursor: pointer;
-  z-index: 2; 
+  z-index: 2;
 }
 
-.landing__page--left{
+.landing__page--left {
   left: 16px;
 }
 
-.landing__page--right{
+.landing__page--right {
   right: 16px;
 }
 
-.side-button__icon{
-  width: 36px;
-  height: 36px;
+.landing__page--left img,
+.landing__page--right img {
   display: block;
+  width: auto;
+  height: 52px;
 }
 
-.main__header{
+.main__header {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
   font-size: clamp(64px, 7vw, 128px);
   font-weight: 300;
   line-height: 0.85;
+  letter-spacing: -0.05em;
   text-align: center;
+}
+
+.landing__description {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  z-index: 2;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }
