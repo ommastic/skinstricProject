@@ -166,7 +166,14 @@ export default function UploadImage() {
               <span className="image__diamond image__diamond--three" />
             </span>
 
-            <img src={cameraIcon} alt="" />
+            <span className="image__icon--wrapper">
+              <img src={cameraIcon} alt="" aria-hidden="true" />
+            </span>
+
+            <div className="connector connector--camera">
+              <span className="connector__line" />
+              <span className="connector__dot" />
+            </div>
             <span className="image__option--label">ALLOW A.I.
               <br />
               TO SCAN YOUR FACE
@@ -181,7 +188,14 @@ export default function UploadImage() {
               <span className="image__diamond image__diamond--three" />
             </span>
 
-            <img src={galleryIcon} alt="" aria-hidden='true'/>
+            <span className="image__icon--wrapper">
+              <img src={galleryIcon} alt="" aria-hidden='true' />
+            </span>
+
+            <div className="connector connector--gallery">
+              <span className="connector__line" />
+              <span className="connector__dot" />
+            </div>
             <span className="image__option--label">ALLOW A.I.
               <br />
               ACCESS GALLERY
