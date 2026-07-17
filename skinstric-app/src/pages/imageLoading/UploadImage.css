@@ -31,17 +31,17 @@
 }
 
 .image__options {
-  width: min(100%, 950px);
+  width: min(100%, 1100px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 100px;
+  gap: 140px;
 }
 
 .image__option {
   position: relative;
-  width: 360px;
-  height: 360px;
+  width: 382px;
+  height: 382px;
   display: grid;
   place-items: center;
   border: none;
@@ -82,15 +82,7 @@
   width: 382px;
   height: 382px;
   opacity: 0.5;
-  animation: rotate-diamond-two 60s linear infinite;
-}
-
-.image__option {
-  width: 136px;
-  height: 136px;
-  object-fit: contain;
-  transition: transform 220ms ease;
-  transform-origin: center;
+  animation: rotate-diamond-three 60s linear infinite;
 }
 
 .image__option--icon{
@@ -100,24 +92,31 @@
   width: 136px;
   height: 136px;
   object-fit: contain;
+
+  transition: transform 220m ease;
 }
 
 .image__option--label{
   position: absolute;
   z-index: 3;
-  font-size: 0.75rem;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: 0.05rem;
+  width: max-content;
+  font-weight: 500;
+  text-align: left;
+  pointer-events: none;
 }
 
 .image__option--camera .image__option--label {
-  top: 200px;
-  right: -100px;
+  top: 112px;
+  left: 275px;
 }
 
 .image__option--gallery .image__option--label {
-  left: -20px;
+  right: 270px;
   bottom: 105px;
+  text-align: right;
 }
 
 @keyframes rotate-diamond-one {
