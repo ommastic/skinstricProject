@@ -18,13 +18,14 @@
   align-items: center;
   padding: 4rem 2rem 6rem;
   overflow: hidden;
+  min-height: 0;
 }
 
 .upload__image--heading {
   position: absolute;
   top: 4px;
   left: 16px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.2rem;
 }
@@ -49,10 +50,52 @@
   cursor: pointer;
 }
 
+.image__diamonds {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.image__diamond{
+  position: absolute;
+  border: 2px dashed #d8d8df;
+  transform-origin: center;
+}
+
+.image__diamond--one {
+  width: 210px;
+  height: 210px;
+  animation: rotate-diamond-one 18s linear infinite;
+}
+
+.image__diamond--two {
+  width: 245px;
+  height: 245px;
+  opacity: 0.75;
+  animation: rotate-diamond-two 24s linear infinite;
+}
+
+.image__diamond--three {
+  width: 280px;
+  height: 280px;
+  opacity: 0.5;
+  animation: rotate-diamond-two 30s linear infinite;
+}
+
 .image__option img {
   width: 136px;
   height: 136px;
   object-fit: contain;
+  transition: transform 220ms ease;
+  transform-origin: center;
+}
+
+.image__option:hover img,
+.image__option:focus-visible img {
+  transform: scale(1.08);
 }
 
 .image__option--label {

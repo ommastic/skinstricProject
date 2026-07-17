@@ -159,6 +159,13 @@ export default function UploadImage() {
 
         <section className="image__options">
           <button type="button" className="image__option image__option--camera" onClick={() => navigate('/camera')}>
+
+            <span className="image__diamonds" aria-hidden='true'>
+              <span className="image__diamond image__diamond--one" />
+              <span className="image__diamond image__diamond--two" />
+              <span className="image__diamond image__diamond--three" />
+            </span>
+
             <img src={cameraIcon} alt="" />
             <span className="image__option--label">ALLOW A.I.
               <br />
@@ -167,7 +174,14 @@ export default function UploadImage() {
           </button>
 
           <button type='button' className="image__option image__option--gallery" onClick={openFilePicker} disabled={isUploading}>
-            <img src={galleryIcon} alt="" />
+
+            <span className="image__diamonds" aria-hidden='true'>
+              <span className="image__diamond image__diamond--one" />
+              <span className="image__diamond image__diamond--two" />
+              <span className="image__diamond image__diamond--three" />
+            </span>
+
+            <img src={galleryIcon} alt="" aria-hidden='true'/>
             <span className="image__option--label">ALLOW A.I.
               <br />
               ACCESS GALLERY
