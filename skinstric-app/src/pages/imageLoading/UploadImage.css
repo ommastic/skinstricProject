@@ -1,0 +1,119 @@
+.upload__image--page {
+  height: 100dvh;
+  min-height: 0;
+  width: 100%;
+  background: #fff;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.upload__image--wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem 6rem;
+  overflow: hidden;
+}
+
+.upload__image--heading {
+  position: absolute;
+  top: 4px;
+  left: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+}
+
+.image__options {
+  width: min(100%, 950px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
+}
+
+.image__option {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: #111;
+  cursor: pointer;
+}
+
+.image__option img {
+  width: 136px;
+  height: 136px;
+  object-fit: contain;
+}
+
+.image__option--label {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  letter-spacing: 0.08rem;
+}
+
+.image__upload--input {
+  display: none;
+}
+
+.image__upload--status,
+.image__upload--error,
+.image__upload--success {
+  margin-top: 1rem;
+  text-align: center;
+  max-width: 520px;
+}
+
+.image__upload--error {
+  color: #b91c1c;
+}
+
+.image__upload--success {
+  color: #0f766e;
+}
+
+.image__upload--preview {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: min(220px, 28vw);
+  height: 220px;
+  object-fit: cover;
+  border: 2px dashed #111;
+  padding: 0.5rem;
+  background: #fff;
+}
+
+.image__upload--back,
+.image__upload--proceed {
+  position: absolute;
+  bottom: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.image__upload--back {
+  left: 2rem;
+}
+
+.image__upload--proceed {
+  right: 2rem;
+}
+
+.image__upload--back img,
+.image__upload--proceed img {
+  display: block;
+  height: 52px;
+  width: auto;
+}

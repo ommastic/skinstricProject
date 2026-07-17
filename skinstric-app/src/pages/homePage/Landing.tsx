@@ -21,7 +21,7 @@ export default function Landing() {
         </button>
 
         <h1 className="main__header">Sophisticated<br />skincare</h1>
-        <button className='landing__page--right' onClick={() => navigate('/introduction')}>
+        <button className='landing__page--right' onClick={() => navigate('/intro')}>
           <img src={buttonIcon1} alt='Take Test' aria-hidden='true' />
         </button>
    

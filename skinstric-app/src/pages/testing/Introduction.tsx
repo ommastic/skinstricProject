@@ -140,7 +140,7 @@ export default function Introduction() {
           )}
 
           {step === 'success' && (
-            <button className="analysis__continue" type='button' onClick={() => navigate('/')}>
+            <button className="analysis__continue" type='button' onClick={() => navigate('/upload')}>
               <img src={proceedButton} alt='forward-button' aria-hidden='true' />
             </button>
           )}
