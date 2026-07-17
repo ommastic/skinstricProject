@@ -66,26 +66,26 @@
 }
 
 .image__diamond--one {
-  width: 210px;
-  height: 210px;
-  animation: rotate-diamond-one 18s linear infinite;
+  width: 305px;
+  height: 305px;
+  animation: rotate-diamond-one 100s linear infinite;
 }
 
 .image__diamond--two {
-  width: 245px;
-  height: 245px;
+  width: 344px;
+  height: 344px;
   opacity: 0.75;
-  animation: rotate-diamond-two 24s linear infinite;
+  animation: rotate-diamond-two 80s linear infinite;
 }
 
 .image__diamond--three {
-  width: 280px;
-  height: 280px;
+  width: 382px;
+  height: 382px;
   opacity: 0.5;
-  animation: rotate-diamond-two 30s linear infinite;
+  animation: rotate-diamond-two 60s linear infinite;
 }
 
-.image__option img {
+.image__option {
   width: 136px;
   height: 136px;
   object-fit: contain;
@@ -111,8 +111,8 @@
 }
 
 .image__option--camera .image__option--label {
-  top: 105px;
-  right: -20px;
+  top: 200px;
+  right: -100px;
 }
 
 .image__option--gallery .image__option--label {
@@ -134,7 +134,7 @@
     transform: rotate(20deg)
   }
   to {
-    transform: rotate(-340deg)
+    transform: rotate(380deg)
   }
 }
 
