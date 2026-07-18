@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import backButton from '../../assets/button-back.svg'
 import proceedButton  from '../../assets/button-proceed.svg'
-import './Introduction.css'
+import './IntroductionPage.css'
 
 
 const API_URL = "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne";
