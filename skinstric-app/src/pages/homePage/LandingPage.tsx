@@ -3,7 +3,7 @@ import rectangle2 from '../../assets/Rectangle 2779.svg';
 import buttonIcon1 from '../../assets/button-icon-text-shrunk-left.svg';
 import buttonIcon2 from '../../assets/button-icon-text-shrunk-right.svg';
 import { useNavigate } from 'react-router-dom';
-import './Landing.css';
+import './LandingPage.css';
 import Header from '../../components/Header';
 
 export default function Landing() {
