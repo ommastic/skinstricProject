@@ -21,17 +21,19 @@
   position: absolute;
   top: 4px;
   left: 16px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2rem;
 }
 
-.analysis section {
+.analysis__content {
+  position: relative;
   width: 100%;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .analysis__form,
@@ -54,21 +56,33 @@
 }
 
 .analysis__input {
-  width: 486px;
+  width: min(486px, 90vw);
   min-width: 0;
   border: none;
-  border-bottom: 2px solid #111;
-  padding-top: 4px;
-  padding-bottom: 8px;
+  border-bottom: 1px solid #111;
   font-size: 60px;
-  text-align: left;
+  text-align: center;
   outline: none;
   background: transparent;
   color: rgb(154, 155, 156);
-  overflow: clip;
-  overflow-clip-margin: 0;
 }
 
+.analysis__error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: min(420px, 75vw);
+  margin: 0;
+
+  transform: translate(-50%, -220px);
+
+  color: #b91c1c;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  z-index: 3;
+}
 .analysis__actions {
   position: absolute;
   left: 2rem;
@@ -132,23 +146,23 @@
 }
 
 .rotating-square__one{
-  width: 430px;
-  height: 430px;
+  width: 470px;
+  height: 470px;
   color:  rgb(154, 155, 156);
 
   animation: rotate-clockwise 35s linear infinite;
 }
 
 .rotating-square__two{
-  width: 470px;
-  height: 470px;
+  width: 520px;
+  height: 520px;
 
   animation: rotate-clockwise 50s linear infinite;
 }
 
 .rotating-square__three{
-  width: 500px;
-  height: 500px;
+  width: 560px;
+  height: 560px;
 
   animation: rotate-clockwise 60s linear infinite;
 }

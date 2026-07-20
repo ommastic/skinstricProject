@@ -1,20 +1,35 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import backButton from "../../assets/button-back.svg";
-import forwardButton from "../../assets/button-proceed.svg";
+import getSummary from "../../assets/getSummary.svg";
 import './SelectDataTypePage.css';
+
+type AnalysisScores = Record<string, number>;
+
+type AnalysisData = {
+  race: AnalysisScores;
+  age: AnalysisScores;
+  gender?: AnalysisScores;
+};
 
 
 export default function SelectDataTypePage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const analysisData = (location.state as { analysisData?: AnalysisData } | null)?.analysisData ?? null;
+
+  const navigateToDemographics = () => {
+    navigate("/demographics", { state: { analysisData } });
+  };
+
   return (
     <div className="select-data-page">
       <Header />
       <main className="select-data-page__content">
         <section className="select-data-page__intro">
-          <h1>A.I. ANALYSIS</h1>
-          <p>A.I. HAS ESTIMATED THE FOLLOWING.</p>
-          <p>FIX STIMATED INFORMATION IF NEEDED.</p>
+          <p className="select-data-page__header">A.I. ANALYSIS</p>
+          <p className="select-data-page__sub-header">A.I. HAS ESTIMATED THE FOLLOWING.</p>
+          <p className="select-data-page__sub-header">FIX ESTIMATED INFORMATION IF NEEDED.</p>
         </section>
 
         <section className="analysis__menu">
@@ -22,7 +37,7 @@ export default function SelectDataTypePage() {
           <span className='analysis__outer-diamond analysis__outer-diamond--two' aria-hidden='true' />
           <span className='analysis__outer-diamond analysis__outer-diamond--three' aria-hidden='true' />
 
-          <button type="button" className="analysis__diamond analysis__diamond--demographics" onClick={() => navigate("/demographics")}>
+          <button type="button" className="analysis__diamond analysis__diamond--demographics" onClick={navigateToDemographics}>
             <span>DEMOGRAPHICS</span>
           </button>
 
@@ -60,9 +75,9 @@ export default function SelectDataTypePage() {
         <button
           type="button"
           className="select-data-page__nav-button select-data-page__nav-button--forward"
-          onClick={() => navigate("/demographics")}
+          onClick={navigateToDemographics}
         >
-          <img src={forwardButton} alt="Forward" />
+          <img src={getSummary} alt="Forward" />
         </button>
       </main>
     </div>

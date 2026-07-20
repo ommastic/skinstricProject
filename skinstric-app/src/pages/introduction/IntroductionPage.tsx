@@ -26,11 +26,21 @@ export default function Introduction() {
   const [message, setMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleNameSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  // Allow typical personal name characters: letters, spaces, apostrophes, and hyphens.
+  const validNamePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+
+  const handleNameSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!name.trim()) {
+    const trimmedName = name.trim();
+
+    if (!trimmedName) {
       setErrorMessage("Please enter your name.");
+      return;
+    }
+
+    if (!validNamePattern.test(trimmedName)) {
+      setErrorMessage("Please use letters only. Names may include spaces, apostrophes, and hyphens.");
       return;
     }
 
@@ -39,7 +49,7 @@ export default function Introduction() {
   };
 
   const handleLocationSubmit = async (
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.SyntheticEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
 
@@ -88,13 +98,19 @@ export default function Introduction() {
         </div>
 
         <section className="analysis__content">
+          {errorMessage && (
+            <p className="analysis__error" role='alert'>{errorMessage}</p>
+          )}
+
           {step === 'name' && (
             <form id="name-form" onSubmit={handleNameSubmit} className="analysis__form">
               <label htmlFor='name' className="analysis__prompt">
                 CLICK TO TYPE
               </label>
 
-              <input type="text" id="name" className="analysis__input" value={name} onChange={(event) => setName(event.target.value)}
+              <input type="text" id="name" className="analysis__input" value={name} 
+              onChange={(event) => {setName(event.target.value);
+                setErrorMessage('')}}
                 placeholder='Introduce Yourself' autoComplete='name' autoFocus />
             </form>
           )}
@@ -104,7 +120,8 @@ export default function Introduction() {
                 WHERE ARE YOU FROM
               </label>
 
-              <input type="text" id="location" className="analysis__input" value={location} onChange={(event) => setLocation(event.target.value)}
+              <input type="text" id="location" className="analysis__input" value={location} onChange={(event) => {setLocation(event.target.value);
+              setErrorMessage('')}}
                 placeholder='Your city name' autoComplete='address-level2' autoFocus />
             </form>
           )}

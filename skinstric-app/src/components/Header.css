@@ -1,5 +1,5 @@
 .header-wrapper{
-  height: 56px;
+  height: 64px;
   flex-shrink: 0;
 }
 
@@ -42,4 +42,8 @@
 
 .text__intro{
   margin-left: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: gray;
 }

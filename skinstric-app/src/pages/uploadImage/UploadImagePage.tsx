@@ -23,6 +23,8 @@ type PhaseTwoResponse = {
   };
 };
 
+const ANALYSIS_STORAGE_KEY = 'skinstric.phaseTwoAnalysis';
+
 const convertImageFileToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -128,6 +130,10 @@ export default function UploadImage() {
 
       setSuccessMesage(response.data.message);
       setAnalysisData(response.data.data);
+      sessionStorage.setItem(
+        ANALYSIS_STORAGE_KEY,
+        JSON.stringify(response.data.data),
+      );
     } catch (error: unknown) {
       console.log('Image upload failed: ', error);
 
