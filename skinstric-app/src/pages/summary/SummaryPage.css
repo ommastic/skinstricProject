@@ -1,0 +1,11 @@
+.summary-page .demographics-confidence__item {
+	cursor: default;
+}
+
+.summary-page .demographics-confidence__item:hover {
+	background: transparent;
+}
+
+.summary-page .demographics-confidence__item--selected:hover {
+	background: #1c1c1c;
+}
