@@ -2,7 +2,8 @@ import Header from "../../components/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo, useState, type CSSProperties } from "react";
 import backButton from '../../assets/button-back.svg';
-import '../demographics/DemographicsPage.css'
+import backHomeButton from '../../assets/home-forward.svg';
+import '../demographics/DemographicsPage.css';
 import './SummaryPage.css';
 
 type AnalysisScores = Record<string, number>;
@@ -239,7 +240,9 @@ export default function SummaryPage() {
 
                 return (
                   <li key={label}>
-                    <div className={`demographics-confidence__item ${isSelected ? 'demographics-confidence__item--selected' : ''}`}>
+                    <div className={`demographics-confidence__item ${isSelected ? 'demographics-confidence__item--selected' : ''}`}
+                      aria-current={isSelected ? 'true' : undefined}
+                    >
                       <span className="demographics-confidence__name">
                         <span className="demographics-confidence__diamond" aria-hidden="true" />
                         {formatLabel(label)}
@@ -263,6 +266,15 @@ export default function SummaryPage() {
             onClick={() => navigate(-1)}
           >
             <img src={backButton} alt="" aria-hidden="true" />
+          </button>
+
+          <button
+            type="button"
+            className="summary-page__home"
+            onClick={() => navigate('/')}
+          >
+            <img src={backHomeButton} alt="" aria-hidden="true" />
+            <span className="summary-page__home-label">HOME</span>
           </button>
         </footer>
       </main>

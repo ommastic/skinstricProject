@@ -1,0 +1,384 @@
+.selfie-page {
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #111;
+}
+
+.selfie-page__content {
+  position: relative;
+  flex: 0 0 auto;
+  height: calc(100dvh - 64px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Camera */
+
+.selfie-camera,
+.selfie-camera__media {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.selfie-camera__media {
+  position: relative;
+  overflow: hidden;
+  background: #ececec;
+}
+
+.selfie-camera__video,
+.selfie-camera__preview {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.selfie-camera__video {
+  transform: scaleX(-1);
+}
+
+.selfie-camera__setup {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #fff;
+  z-index: 3;
+}
+
+.selfie-camera__setup::before,
+.selfie-camera__setup::after {
+  content: "";
+  position: absolute;
+  width: min(270px, 58vw);
+  aspect-ratio: 1;
+  border: 1px dashed #c6c6c6;
+  transform: rotate(27deg);
+}
+
+.selfie-camera__setup::after {
+  transform: rotate(62deg);
+}
+
+.selfie-camera__setup p {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.selfie-camera__shutter {
+  position: relative;
+  z-index: 2;
+  width: 76px;
+  height: 76px;
+  border: 2px solid #1c1c1c;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 15deg,
+    #1c1c1c 0deg 42deg,
+    transparent 42deg 60deg,
+    #1c1c1c 60deg 102deg,
+    transparent 102deg 120deg,
+    #1c1c1c 120deg 162deg,
+    transparent 162deg 180deg,
+    #1c1c1c 180deg 222deg,
+    transparent 222deg 240deg,
+    #1c1c1c 240deg 282deg,
+    transparent 282deg 300deg,
+    #1c1c1c 300deg 342deg,
+    transparent 342deg 360deg
+  );
+}
+
+.selfie-camera__capture {
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  z-index: 4;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.selfie-camera__capture-icon {
+  width: 46px;
+  height: 46px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+}
+
+.selfie-camera__success {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  z-index: 4;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 11px;
+}
+
+.selfie-camera__tips {
+  position: absolute;
+  left: 50%;
+  bottom: 200px;
+  z-index: 4;
+  width: min(94%, 620px);
+  transform: translateX(-50%);
+  color: #fff;
+  text-align: center;
+ 
+}
+
+.selfie-camera__tips .header{
+  font-size: 14px;
+}
+
+.selfie-camera__tips .details{
+  font-size: 12px;
+}
+
+.selfie-camera__setup .selfie-camera__tips {
+  color: #111;
+}
+
+.selfie-camera__tips p {
+  margin: 0 0 14px;
+}
+
+.selfie-camera__tips div {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.selfie-page__retake {
+  position: absolute;
+  top: 68px;
+  right: 24px;
+  z-index: 10;
+  height: 30px;
+  padding: 0 15px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+/* File upload */
+
+.selfie-upload {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #efefef;
+  text-align: center;
+  overflow: hidden;
+}
+
+.selfie-upload__title {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+}
+
+.selfie-upload__description {
+  margin: 0;
+  color: #707070;
+  font-size: 12px;
+}
+
+.selfie-upload__input {
+  display: none;
+}
+
+.selfie-upload__button {
+  min-width: 130px;
+  height: 38px;
+  padding: 0 18px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.selfie-upload--has-preview {
+  position: relative;
+  background: #222;
+}
+
+.selfie-upload__preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.selfie-upload--has-preview .selfie-upload__button {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+}
+
+/* Actions */
+
+.selfie-page__actions {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selfie-page__back,
+.selfie-page__proceed {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.selfie-page__back img,
+.selfie-page__proceed img {
+  display: block;
+  width: auto;
+  height: 48px;
+}
+
+.selfie-page__back img {
+  filter: brightness(0) invert(1) contrast(1.05);
+  filter: brightness(0) invert(1) contrast(1.05)
+    drop-shadow(0 0 2px rgb(0 0 0 / 0.85))
+    drop-shadow(0 2px 6px rgb(0 0 0 / 0.7));
+}
+
+.selfie-page__proceed {
+  color: #fff;
+  font-size: 10px;
+}
+
+.selfie-page__proceed:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.selfie-page__error {
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  z-index: 12;
+  width: min(420px, calc(100% - 32px));
+  margin: 0;
+  padding: 10px 14px;
+  transform: translateX(-50%);
+  background: rgb(255 255 255 / 88%);
+  color: #b91c1c;
+  font-size: 12px;
+  text-align: center;
+}
+
+.selfie-page__canvas {
+  display: none;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .selfie-camera__capture {
+    top: auto;
+    right: 24px;
+    bottom: 82px;
+    transform: none;
+  }
+
+  .selfie-camera__tips {
+    bottom: 20px;
+    padding: 0 80px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .selfie-camera,
+  .selfie-camera__media,
+  .selfie-upload {
+    min-height: 0;
+  }
+
+  .selfie-camera__video,
+  .selfie-camera__preview {
+    object-position: center;
+  }
+
+  .selfie-camera__capture {
+    left: 50%;
+    right: auto;
+    bottom: 112px;
+    transform: translateX(-50%);
+  }
+
+  .selfie-camera__tips {
+    bottom: 28px;
+    padding: 0 12px;
+  }
+
+  .selfie-camera__tips div {
+    gap: 8px 14px;
+  }
+
+  .selfie-camera__success {
+    top: 16%;
+  }
+
+  .selfie-page__actions {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .selfie-page__back img,
+  .selfie-page__proceed img {
+    height: 42px;
+  }
+
+  .selfie-upload--has-preview .selfie-upload__button {
+    right: 12px;
+    bottom: 72px;
+  }
+}

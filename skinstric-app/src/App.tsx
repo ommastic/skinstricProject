@@ -5,6 +5,7 @@ import UploadImagePage from "./pages/uploadImage/UploadImagePage";
 import SelectOptionsPage from "./pages/selectPage/SelectOptionsPage";
 import SelectDataTypePage from "./pages/result/SelectDataTypePage"
 import DemographicsPage from "./pages/demographics/DemographicsPage";
+import SelfiePage from "./pages/selfie/SelfiePage";
 import SummaryPage from "./pages/summary/SummaryPage";
 import './App.css'
 
@@ -19,6 +20,7 @@ export default function App(){
       <Route path='/results' element={<SelectDataTypePage/>}/>
       <Route path='/demographics' element={<DemographicsPage />}/>
       <Route path='/summary' element={<SummaryPage />}/>
+      <Route path='/camera' element={<SelfiePage />}/>
     </Routes>
   )
 }

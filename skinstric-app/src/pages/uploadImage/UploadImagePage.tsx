@@ -1,57 +1,15 @@
 
 import Header from "../../components/Header";
-import axios from "axios";
+import { analyzeImage, type AnalysisData } from "../../assets/services/analyzeImage";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import backButton from '../../assets/button-back.svg';
 import cameraIcon from '../../assets/camera-icon.svg';
 import galleryIcon from '../../assets/gallery.svg';
 import proceedButton from '../../assets/button-proceed.svg';
+import { convertImageFileToBase64 } from "../../utils/imageToBase64";
 import './UploadImagePage.css';
 
-
-const API_URL = "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
-
-type AnalysisScores = Record<string, number>;
-
-type PhaseTwoResponse = {
-  message: string;
-  data: {
-    race: AnalysisScores;
-    age: AnalysisScores;
-    gender?: AnalysisScores;
-  };
-};
-
-const ANALYSIS_STORAGE_KEY = 'skinstric.phaseTwoAnalysis';
-
-const convertImageFileToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-
-
-    reader.onload = () => {
-      if (typeof reader.result !== 'string') {
-        reject(new Error("Unable to convert image."));
-        return;
-      }
-
-      const base64 = reader.result.split(",")[1];
-
-      if (!base64) {
-        reject(new Error("Invalid base64 image."));
-        return;
-      }
-
-      resolve(base64);
-    };
-
-    reader.onerror = () => {
-      reject(new Error("Unable to read the selected image."));
-    };
-    reader.readAsDataURL(file);
-  });
-};
 
 export default function UploadImage() {
 
@@ -59,7 +17,7 @@ export default function UploadImage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [previewUrl, setPreviewUrl] = useState('');
-  const [analysisData, setAnalysisData] = useState<PhaseTwoResponse['data'] | null>(null);
+  const [analysisData, setAnalysisData] = useState<AnalysisData | null>(null);
 
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -81,17 +39,22 @@ export default function UploadImage() {
 
 
   const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+
     const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    setErrorMessage('');
+    setSuccessMesage('');
+    setAnalysisData(null);
 
     const allowedImageTypes = [
       'image/png',
       'image/jpeg',
       'image/webp'
     ];
-
-    if (!file) {
-      return;
-    }
 
     if (!allowedImageTypes.includes(file.type)) {
       setErrorMessage('Please select a PNG, JPEG, or WebP image.');
@@ -103,18 +66,14 @@ export default function UploadImage() {
 
     if (file.size > maximumSize) {
       setErrorMessage('The image must be smaller than 10MB.');
+      event.target.value = '';
       return;
     }
 
     const localPreview = URL.createObjectURL(file);
 
 
-    setPreviewUrl((previousURL) => {
-      if (previousURL) {
-        URL.revokeObjectURL(previousURL);
-      }
-      return localPreview;
-    });
+    setPreviewUrl(localPreview);
 
     try {
       setIsUploading(true);
@@ -124,30 +83,20 @@ export default function UploadImage() {
 
       const base64Image = await convertImageFileToBase64(file);
 
-      const response = await axios.post<PhaseTwoResponse>(API_URL, {
-        image: base64Image,
-      });
+      const returnedAnalysisData = await analyzeImage(base64Image);
 
-      setSuccessMesage(response.data.message);
-      setAnalysisData(response.data.data);
-      sessionStorage.setItem(
-        ANALYSIS_STORAGE_KEY,
-        JSON.stringify(response.data.data),
+      setAnalysisData(returnedAnalysisData);
+      setSuccessMesage(
+        "Success: Your image was analyzed"
       );
+
     } catch (error: unknown) {
-      console.log('Image upload failed: ', error);
+      console.error('Image upload failed: ', error);
 
-      if (axios.isAxiosError(error)) {
-        const serverMessage = typeof error.response?.data?.message === 'string' && error.response.data.message;
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to upload the image."
+      );
 
-        setErrorMessage(
-          serverMessage ?? 'The server could not process this image.'
-        );
-      } else {
-        setErrorMessage(
-          error instanceof Error ? error.message : "Unable to upload the image."
-        );
-      }
     } finally {
       setIsUploading(false);
     }
@@ -178,7 +127,7 @@ export default function UploadImage() {
     setShowCameraPermission(false);
   };
 
-  const navigateToAnalysizedData = () => {
+  const navigateToAnalyzedData = () => {
     navigate('/results', { state: { analysisData } });
   };
 
@@ -192,7 +141,7 @@ export default function UploadImage() {
           <section>
             <div className="analysis__diamonds" aria-hidden='true'>
               <span className="analysis__diamond analysis__diamond--one" />
-              <span className="analysis__diamond abalysis__diamond--two" />
+              <span className="analysis__diamond analysis__diamond--two" />
               <span className="analysis__diamond analysis__diamond--three" />
             </div>
             <p className="analysis__loading--text">
@@ -274,7 +223,7 @@ export default function UploadImage() {
             </button>
 
             {analysisData && (
-              <button type='button' className="image__upload--proceed" onClick={navigateToAnalysizedData}>
+              <button type='button' className="image__upload--proceed" onClick={navigateToAnalyzedData}>
                 <img src={proceedButton} alt="" />
               </button>
             )}
@@ -282,7 +231,7 @@ export default function UploadImage() {
             {showCameraPermission && (
               <div className="camera__permission--overlay">
                 <section className="camera__permission--modal" role='dialog' aria-modal='true' aria-labelledby='camera-permission-title'>
-                  <h2 id='camera__permission--title' className="camera__permission--title">
+                  <h2 id='camera-permission-title' className="camera__permission--title">
                     ALLOW A.I TO ACCESS YOUR CAMERA
                   </h2>
 

@@ -9,3 +9,31 @@
 .summary-page .demographics-confidence__item--selected:hover {
 	background: #1c1c1c;
 }
+
+.summary-page__home {
+	position: relative;
+	padding: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.summary-page__home img {
+	display: block;
+	height: 48px;
+	width: auto;
+}
+
+.summary-page__home-label {
+	position: absolute;
+	right: calc(100% + 14px);
+	top: 50%;
+  font-weight: 600;
+	transform: translateY(-50%);
+	font-size: 14px;
+
+	letter-spacing: 0.08rem;
+	line-height: 1;
+	white-space: nowrap;
+}
