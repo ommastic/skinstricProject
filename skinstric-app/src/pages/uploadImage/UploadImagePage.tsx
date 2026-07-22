@@ -218,7 +218,7 @@ export default function UploadImage() {
               </div>
             </div>
 
-            <button type='button' className="image__upload--back" onClick={() => navigate(-1)}>
+            <button type='button' className="image__upload--back" onClick={() => navigate('/intro')}>
               <img src={backButton} alt="" aria-hidden='true' />
             </button>
 

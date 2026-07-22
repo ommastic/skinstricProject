@@ -94,6 +94,10 @@
   z-index: 2;
 }
 
+.analysis__status--dots{
+  font-size: 16px;
+}
+
 .analysis__continue,
 .analysis__back {
   background: transparent;

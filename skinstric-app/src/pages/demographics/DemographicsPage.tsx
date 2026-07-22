@@ -298,7 +298,7 @@ export default function DemographicsPage() {
           <button
             type="button"
             className="demographics-page__back"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/upload')}
           >
             <img src={backButton} alt="" aria-hidden="true" />
           </button>

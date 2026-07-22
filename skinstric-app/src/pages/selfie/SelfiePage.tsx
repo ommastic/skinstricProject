@@ -2,7 +2,6 @@ import Header from "../../components/Header";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backButton from "../../assets/button-back.svg";
-import proceedButton from "../../assets/button-proceed.svg";
 import { analyzeImage } from "../../assets/services/analyzeImage";
 import { initializeCamera, stopMediaStream } from "../../utils/cameraUtils";
 import { IoCameraOutline } from "react-icons/io5";
@@ -27,9 +26,6 @@ export default function SelfiePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const stopCamera = () => {
-    // streamRef.current?.getTracks().forEach((track) => {
-    //   track.stop();
-    // });
     stopMediaStream(streamRef.current);
 
     streamRef.current = null;
@@ -125,7 +121,7 @@ export default function SelfiePage() {
     void startCamera();
   };
 
-  const handleProceed = async () => {
+  const handleUsePicture = async () => {
     if (!base64Image) {
       setErrorMessage("Take a picture before proceeding.");
       return;
@@ -158,7 +154,7 @@ export default function SelfiePage() {
 
   useEffect(() => {
     const video = videoRef.current;
-    
+
     let isCancelled = false;
     let currentStream: MediaStream | null = null;
 
@@ -231,73 +227,93 @@ export default function SelfiePage() {
 
   return (
     <div className="selfie-page">
-      <Header />
+      <div className="selfie-page__header-overlay">
+        <Header />
+      </div>
 
       <main className="selfie-page__content">
         <section className="selfie-camera">
-            <div className="selfie-camera__media">
-              {previewUrl ? (
-                <img
-                  className="selfie-camera__preview"
-                  src={previewUrl}
-                  alt="Captured selfie preview"
-                />
-              ) : (
-                <video
-                  ref={videoRef}
-                  className="selfie-camera__video"
-                  autoPlay
-                  playsInline
-                  muted
-                />
-              )}
+          <div className="selfie-camera__media">
+            {previewUrl ? (
+              <img
+                className="selfie-camera__preview"
+                src={previewUrl}
+                alt="Captured selfie"
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                className="selfie-camera__video"
+                autoPlay
+                playsInline
+                muted
+              />
+            )}
 
-              {cameraStatus === "starting" && !previewUrl && (
-                <div className="selfie-camera__setup">
-                  <div className="selfie-camera__shutter" />
-                  <p>SETTING UP CAMERA...</p>
-                </div>
-              )}
+            {isSubmitting && (
+              <div className="selfie-camera__overlay">
+                <div className="spinner"></div>
+                <p className="selfie-camera__analyzing-phase">Analyzing photo <br />...</p>
+              </div>
+            )}
 
-              {cameraStatus === "ready" && !previewUrl && (
-                <button
-                  type="button"
-                  className="selfie-camera__capture"
-                  onClick={takePicture}
-                >
-                  <span>TAKE PICTURE</span>
-                  <span className="selfie-camera__capture-icon">
-                    <IoCameraOutline />
-                  </span>
-                </button>
-              )}
+            {cameraStatus === "starting" && !previewUrl && (
+              <div className="selfie-camera__setup">
+                <div className="selfie-camera__shutter" />
+                <p>SETTING UP CAMERA...</p>
+              </div>
+            )}
 
-              {cameraStatus === "captured" && previewUrl && (
-                <p className="selfie-camera__success">
-                  GREAT SHOT!
-                </p>
-              )}
+            {cameraStatus === "ready" && !previewUrl && (
+              <button
+                type="button"
+                className="selfie-camera__capture"
+                onClick={takePicture}
+              >
+                <span className='selfie-camera__take-picture'>TAKE PICTURE</span>
+                <span className="selfie-camera__capture-icon">
+                  <IoCameraOutline className="selfie-camera__camera" />
+                </span>
+              </button>
+            )}
 
-              <div className="selfie-camera__tips">
-                <p className='header'>TO GET BETTER RESULTS MAKE SURE TO HAVE</p>
+            {cameraStatus === "captured" && previewUrl && (
+              <p className="selfie-camera__success">
+                GREAT SHOT!
+              </p>
+            )}
 
-                <div className='details'>
-                  <span>◇ NEUTRAL EXPRESSION</span>
-                  <span>◇ FRONTAL POSE</span>
-                  <span>◇ ADEQUATE LIGHTING</span>
-                </div>
+            <div className="selfie-camera__tips">
+              <p className='header'>TO GET BETTER RESULTS MAKE SURE TO HAVE</p>
+
+              <div className='details'>
+                <span>◇ NEUTRAL EXPRESSION</span>
+                <span>◇ FRONTAL POSE</span>
+                <span>◇ ADEQUATE LIGHTING</span>
               </div>
             </div>
+          </div>
 
-            { previewUrl && (
+          {previewUrl && cameraStatus === "captured" && (
+            <div className="selfie-page__picture-actions">
               <button
                 type="button"
                 className="selfie-page__retake"
                 onClick={retakePicture}
               >
-                RETAKE
+                Retake
               </button>
-            )}
+
+              <button
+                type="button"
+                className="selfie-page__use-picture"
+                onClick={handleUsePicture}
+                disabled={isSubmitting}
+              >
+                Use This Photo
+              </button>
+            </div>
+          )}
         </section>
 
         <canvas
@@ -323,21 +339,6 @@ export default function SelfiePage() {
           >
             <img src={backButton} alt="Back" />
           </button>
-
-          {base64Image && (
-            <button
-              type="button"
-              className="selfie-page__proceed"
-              onClick={handleProceed}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <span>ANALYZING...</span>
-              ) : (
-                <img src={proceedButton} alt="Proceed" />
-              )}
-            </button>
-          )}
         </footer>
       </main>
     </div>

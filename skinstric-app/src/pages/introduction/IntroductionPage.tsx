@@ -127,7 +127,7 @@ export default function Introduction() {
           )}
 
           {step === 'submitting' && (
-            <div className='analysis__status'><p>Processing...</p></div>
+            <div className='analysis__status'><p>Loading Submission <br className="analysis__status--dots"/>...</p></div>
           )}
 
           {step === 'success' && (
