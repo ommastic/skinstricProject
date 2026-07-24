@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 64px 2rem 5.5rem;
+  padding: 0 2rem 5.5rem;
 }
 
 .introduction__header {
@@ -48,7 +48,7 @@
 }
 
 .analysis__prompt {
-  font-size: 20px;
+  font-size: 26px;
   color: rgb(154, 155, 156);
   font-weight: 400;
   letter-spacing: 0.6px;
@@ -95,7 +95,7 @@
 }
 
 .analysis__status--dots{
-  font-size: 16px;
+  font-size: 32px;
 }
 
 .analysis__continue,
@@ -133,8 +133,8 @@
   top: 50%;
   left: 50%;
 
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
 
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -145,7 +145,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px dashed  rgb(154, 155, 156);
+  border: .2px dashed  rgb(201, 209, 216);
   transform-origin: center;
 }
 

@@ -1,4 +1,3 @@
-
 import Header from "../../components/Header";
 import { analyzeImage, type AnalysisData } from "../../assets/services/analyzeImage";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
@@ -6,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import backButton from '../../assets/button-back.svg';
 import cameraIcon from '../../assets/camera-icon.svg';
 import galleryIcon from '../../assets/gallery.svg';
-import proceedButton from '../../assets/button-proceed.svg';
+import { BsThreeDots } from "react-icons/bs";
 import { convertImageFileToBase64 } from "../../utils/imageToBase64";
 import './UploadImagePage.css';
 
@@ -22,6 +21,7 @@ export default function UploadImage() {
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMesage] = useState('');
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showCameraPermission, setShowCameraPermission] = useState(false);
 
   useEffect(() => {
@@ -48,6 +48,7 @@ export default function UploadImage() {
 
     setErrorMessage('');
     setSuccessMesage('');
+    setShowSuccessAlert(false);
     setAnalysisData(null);
 
     const allowedImageTypes = [
@@ -79,6 +80,7 @@ export default function UploadImage() {
       setIsUploading(true);
       setErrorMessage('');
       setSuccessMesage('');
+      setShowSuccessAlert(false);
       setAnalysisData(null);
 
       const base64Image = await convertImageFileToBase64(file);
@@ -89,6 +91,7 @@ export default function UploadImage() {
       setSuccessMesage(
         "Success: Your image was analyzed"
       );
+      setShowSuccessAlert(true);
 
     } catch (error: unknown) {
       console.error('Image upload failed: ', error);
@@ -96,6 +99,7 @@ export default function UploadImage() {
       setErrorMessage(
         error instanceof Error ? error.message : "Unable to upload the image."
       );
+      setShowSuccessAlert(false);
 
     } finally {
       setIsUploading(false);
@@ -138,17 +142,20 @@ export default function UploadImage() {
       <main className="upload__image--wrapper">
         <p className="upload__image--heading">TO START ANALYSIS</p>
         {isUploading ? (
-          <section>
+          <section className="analysis__loading">
             <div className="analysis__diamonds" aria-hidden='true'>
               <span className="analysis__diamond analysis__diamond--one" />
               <span className="analysis__diamond analysis__diamond--two" />
               <span className="analysis__diamond analysis__diamond--three" />
             </div>
+
+            <div className="analysis__loading--context">
             <p className="analysis__loading--text">
               Preparing your Analysis
               <br />
-              <span className="analysis__dots">...</span>
+              <BsThreeDots className="analysis__loading--dots"  aria-hidden='true'/>
             </p>
+            </div>
           </section>
         ) : (
           <>
@@ -209,24 +216,9 @@ export default function UploadImage() {
               <p className="image__upload--success">{successMessage}</p>
             )}
 
-            <div className="image__upload--preview-wrap">
-              <p className="image__upload--preview-title">Preview</p>
-              <div className="image__upload--preview">
-                {previewUrl && (
-                  <img className="image__upload--preview-image" src={previewUrl} alt="Selected preview" />
-                )}
-              </div>
-            </div>
-
             <button type='button' className="image__upload--back" onClick={() => navigate('/intro')}>
               <img src={backButton} alt="" aria-hidden='true' />
             </button>
-
-            {analysisData && (
-              <button type='button' className="image__upload--proceed" onClick={navigateToAnalyzedData}>
-                <img src={proceedButton} alt="" />
-              </button>
-            )}
 
             {showCameraPermission && (
               <div className="camera__permission--overlay">
@@ -247,6 +239,38 @@ export default function UploadImage() {
               </div>
             )}
           </>
+        )}
+
+        <div className="image__upload--preview-wrap">
+          <p className="image__upload--preview-title">Preview</p>
+          <div className="image__upload--preview">
+            {previewUrl && (
+              <img className="image__upload--preview-image" src={previewUrl} alt="Selected preview" />
+            )}
+          </div>
+        </div>
+
+        {showSuccessAlert && analysisData && (
+          <div
+            className="analysis__success-alert-overlay"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="analysis-success-title"
+          >
+            <div className="analysis__success-alert">
+              <p id="analysis-success-title" className="analysis__success-alert-title">
+                Image analyzed succesfully
+              </p>
+
+              <button
+                type="button"
+                className="analysis__success-alert-ok"
+                onClick={navigateToAnalyzedData}
+              >
+                OK
+              </button>
+            </div>
+          </div>
         )}
       </main>
     </div>

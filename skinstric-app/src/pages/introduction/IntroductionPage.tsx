@@ -2,8 +2,9 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import backButton from '../../assets/button-back.svg'
-import proceedButton  from '../../assets/button-proceed.svg'
+import backButton from '../../assets/button-back.svg';
+import proceedButton  from '../../assets/button-proceed.svg';
+import { BsThreeDots } from "react-icons/bs";
 import './IntroductionPage.css'
 
 
@@ -127,7 +128,7 @@ export default function Introduction() {
           )}
 
           {step === 'submitting' && (
-            <div className='analysis__status'><p>Loading Submission <br className="analysis__status--dots"/>...</p></div>
+            <div className='analysis__status'><p>Loading Submission <br /><BsThreeDots className="analysis__status--dots"/></p></div>
           )}
 
           {step === 'success' && (

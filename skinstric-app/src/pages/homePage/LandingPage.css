@@ -17,6 +17,32 @@
   padding: 0 5rem;
 }
 
+/* Invisible left/right hover zones */
+
+.landing__hover-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.landing__hover-area--left {
+  left: 0;
+  width: 35%;
+}
+
+.landing__hover-area--center {
+  left: 35%;
+  width: 30%;
+}
+
+.landing__hover-area--right {
+  right: 0;
+  width: 35%;
+}
+
+/* Half-diamond SVG lines */
+
 .left-svg,
 .right-svg {
   position: absolute;
@@ -25,49 +51,26 @@
   height: 600px;
   transform: translateY(-50%);
   pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
 }
 
 .left-svg {
   left: 0;
 }
 
-.right-svg{
-  right: 0;
-}
-/* 
-.left-lines,
-.right-lines {
-  position: absolute;
-  top: 50%;
-  width: 320px;
-  height: 320px;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-.left-lines {
-  left: 0;
-}
-
-.right-lines {
+.right-svg {
   right: 0;
 }
 
-.rectangle {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: min(602px, 100%);
-  width: auto;
-  pointer-events: none;
-}
-
-.rectangle--left {
-  left: 0;
-}
-
-.rectangle--right {
-  right: 0;
-} */
+/* Left and right arrow buttons */
 
 .landing__page--left,
 .landing__page--right {
@@ -79,7 +82,14 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
 }
 
 .landing__page--left {
@@ -97,27 +107,69 @@
   height: 52px;
 }
 
+/* Main title */
+
 .main__header {
   position: relative;
   z-index: 2;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   font-size: clamp(64px, 7vw, 100px);
   font-weight: 400;
-  line-height: 100px;
+  line-height: 1;
+  text-align: center;
 
-  text-align: center;
-  opacity: 1;
-  tab-size: 4;
-  text-align: center;
+  /* Allow the invisible hover zones to receive the mouse event. */
+
+  pointer-events: none;
+  will-change: transform;
 }
+
+.main__header--sub {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 600ms ease;
+}
+
+/* Description. */
 
 .landing__description {
   position: absolute;
   bottom: 24px;
   left: 32px;
   z-index: 2;
+  margin: 0;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+
+  pointer-events: none;
+}
+
+/* On right hover, keep right side visible and hide left side only. */
+
+.main-wrapper--right-hover .left-svg,
+.main-wrapper--right-hover .landing__page--left {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* On left hover, keep left side visible and hide right side only. */
+
+.main-wrapper--left-hover .right-svg,
+.main-wrapper--left-hover .landing__page--right {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Shift only the second title line based on hovered side. */
+
+.main-wrapper--right-hover .main__header--sub {
+  transform: translateX(-120px);
+}
+
+.main-wrapper--left-hover .main__header--sub {
+  transform: translateX(120px);
 }

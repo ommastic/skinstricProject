@@ -32,16 +32,16 @@ export default function SelectDataTypePage() {
           <p className="select-data-page__sub-header">FIX ESTIMATED INFORMATION IF NEEDED.</p>
         </section>
 
-        <section className="analysis__menu">
-          <span className='analysis__outer-diamond analysis__outer-diamond--one' aria-hidden='true' />
-          <span className='analysis__outer-diamond analysis__outer-diamond--two' aria-hidden='true' />
-          <span className='analysis__outer-diamond analysis__outer-diamond--three' aria-hidden='true' />
+        <section className="result__menu">
+          <span className='result__outer-diamond result__outer-diamond--one' aria-hidden='true' />
+          <span className='result__outer-diamond result__outer-diamond--two' aria-hidden='true' />
+          <span className='result__outer-diamond result__outer-diamond--three' aria-hidden='true' />
 
-          <button type="button" className="analysis__diamond analysis__diamond--demographics" onClick={navigateToDemographics}>
+          <button type="button" className="result__diamond result__diamond--demographics" onClick={navigateToDemographics}>
             <span>DEMOGRAPHICS</span>
           </button>
 
-          <div className="analysis__diamond analysis__diamond--disabled analysis__diamond--cosmetic" aria-disabled='true'>
+          <div className="result__diamond result__diamond--disabled result__diamond--cosmetic" aria-disabled='true'>
             <span>
               SKIN TYPE
               <br />
@@ -49,7 +49,7 @@ export default function SelectDataTypePage() {
             </span>
           </div>
 
-          <div className="analysis__diamond analysis__diamond--disabled analysis__diamond--skin" aria-disabled='true'>
+          <div className="result__diamond result__diamond--disabled result__diamond--skin" aria-disabled='true'>
             <span>
               COSMETIC
               <br />
@@ -57,7 +57,7 @@ export default function SelectDataTypePage() {
             </span>
           </div>
 
-          <div className="analysis__diamond analysis__diamond--disabled analysis__diamond--weather" aria-disabled='true'>
+          <div className="result__diamond result__diamond--disabled result__diamond--weather" aria-disabled='true'>
             <span>
               WEATHER
             </span>

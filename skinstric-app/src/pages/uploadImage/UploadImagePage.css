@@ -306,6 +306,8 @@
 
 .analysis__diamond {
   position: absolute;
+  inset: 0;
+  margin: auto;
   border: 1px dashed #9ca3af;
   transform-origin: center;
 }
@@ -330,39 +332,46 @@
   animation: rotate-diamond-three 60s linear infinite;
 }
 
-.analysis__loading--text{
+.analysis__loading--content {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.analysis__loading--text{
   margin: 0;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.18rem;
   text-align: center;
+  animation: loading-text-pulse 1.8s ease-in-out infinite;
 }
 
 .analysis__loading--dots{
   display: inline-block;
   width: 1.8rem;
   text-align: left;
-  animation: loading-dots 1.2s steps(4, end) infinite;
+  animation: loading-dots 1.2s ease-in-out infinite;
 }
 
 @keyframes loading-dots {
   0% {
-    clip-path: inset(0 100% 0 0);
-  }
-
-  25% {
-    clip-path: inset(0 66% 0 0);
+    opacity: 0.25;
+    transform: translateY(0) scale(0.85);
   }
 
   50% {
-    clip-path: inset(0 33% 0 0);
+    opacity: 1;
+    transform: translateY(4px) scale(1);
   }
 
-  75%,
   100% {
-    clip-path: inset(0 0 0 0);
+    opacity: 0.25;
+    transform: translateY(0) scale(0.85);
   }
 }
 
@@ -386,6 +395,7 @@
 
   background: #1a1a1a;
   color: #fff;
+  border-radius: 16px;
 }
 
 .camera__permission--title {
@@ -395,7 +405,8 @@
   padding: 22px 18px;
 
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 
   font-size: 15px;
   font-weight: 600;
@@ -435,4 +446,79 @@
 .camera__permission--actions button:hover,
 .camera__permission--actions button:focus-visible {
   background: rgba(255, 255, 255, 0.08);
+}
+
+.analysis__success-alert-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.analysis__success-alert {
+  width: min(360px, calc(100vw - 32px));
+  background: #111;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 18px;
+}
+
+.analysis__success-alert-title {
+  margin: 0;
+  padding: 22px 18px;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.analysis__success-alert-ok {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-top: 1px solid #4b5563;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  cursor: pointer;
+}
+
+.analysis__success-alert-ok:hover,
+.analysis__success-alert-ok:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 768px) {
+  .analysis__diamonds {
+    width: 280px;
+    height: 280px;
+  }
+
+  .analysis__diamond--one {
+    width: 260px;
+    height: 260px;
+    margin: -130px 0 0 -130px;
+  }
+
+  .analysis__diamond--two {
+    width: 215px;
+    height: 215px;
+    margin: -107.5px 0 0 -107.5px;
+  }
+
+  .analysis__diamond--three {
+    width: 170px;
+    height: 170px;
+    margin: -85px 0 0 -85px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .analysis__diamond,
+  .analysis__loading--text,
+  .analysis__loading--dots {
+    animation: none;
+  }
 }
